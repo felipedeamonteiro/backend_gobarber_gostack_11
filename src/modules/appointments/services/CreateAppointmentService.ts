@@ -27,12 +27,11 @@ class CreateAppointmentService {
       throw new AppError('This time has already been scheduled.');
     }
 
-    const appointment = appointmentsRepository.create({
+    // Agora com a mudança feita o método "create" cria e já salva os dados.
+    const appointment = await appointmentsRepository.create({
       provider_id,
       date: appointmentDate,
     });
-
-    await appointmentsRepository.save(appointment);
 
     return appointment;
   }
