@@ -3,10 +3,10 @@ import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 import { parseISO } from 'date-fns';
 
-import AppointmentsRepository from '../repositories/AppointmentRepository';
-import CreateAppointmentService from '../services/CreateAppointmentService';
+import AppointmentsRepository from '@modules/appointments/repositories/AppointmentRepository';
+import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
 
-import ensureAutheticated from '../middlewares/ensureAuthenticated';
+import ensureAutheticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 // Rotas precisam estar preocupadas apenas em fazer isso:
 //    - Receber requisição;

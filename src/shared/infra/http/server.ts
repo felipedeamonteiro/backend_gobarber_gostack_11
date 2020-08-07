@@ -11,11 +11,11 @@ import 'express-async-errors';
 // O comando '--transpileOnly' serve apenas para converter o código de ts para js sem se preocupar
 // com erros, o vscode cuida disso
 // A flag '--inspect' serve para o debug do vscode se conectar à aplicação
+import uploadConfig from '@config/upload';
+import AppError from '@shared/errors/AppError';
 import routes from './routes';
-import uploadConfig from './config/upload';
-import AppError from './errors/AppError';
 
-import './database';
+import '@shared/infra/typeorm';
 
 const app = express();
 

@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
-import Appointment from '../models/Appointment';
+import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 
 // DTO = Data Transfer Object => Basicamente é a transferência de dados em formato
 // de objetos
