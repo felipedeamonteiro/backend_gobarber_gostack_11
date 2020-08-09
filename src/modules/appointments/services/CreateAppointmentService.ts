@@ -1,25 +1,26 @@
 /* eslint-disable camelcase */
 import { startOfHour } from 'date-fns';
-import { getCustomRepository } from 'typeorm';
 
 import AppError from '@shared/errors/AppError';
 
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
-import AppointmentsRepository from '../repositories/AppointmentRepository';
+import IAppointmentRepository from '../repositories/IAppointmentsRepository';
 
-interface Request {
+interface IRequest {
   provider_id: string;
   date: Date;
 }
 
 class CreateAppointmentService {
-  // só tem um método pq cada service só precisa se preocupar com uma responsabilidade
-  public async execute({ date, provider_id }: Request): Promise<Appointment> {
-    const appointmentsRepository = getCustomRepository(AppointmentsRepository);
+  // Aqui foi criada uma variável que já foi declarada nos parâmetros do constructor
+  // Só dá pra fazer isso no Typescript, e não no Javascript
+  constructor(private appointmentsRepository: IAppointmentRepository) {}
 
+  // só tem um método pq cada service só precisa se preocupar com uma responsabilidade
+  public async execute({ date, provider_id }: IRequest): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
 
-    const findAppointmentInSameDate = await appointmentsRepository.findByDate(
+    const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
       appointmentDate,
     );
 
@@ -28,7 +29,7 @@ class CreateAppointmentService {
     }
 
     // Agora com a mudança feita o método "create" cria e já salva os dados.
-    const appointment = await appointmentsRepository.create({
+    const appointment = await this.appointmentsRepository.create({
       provider_id,
       date: appointmentDate,
     });
