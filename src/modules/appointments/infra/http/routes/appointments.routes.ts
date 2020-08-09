@@ -1,11 +1,8 @@
 /* eslint-disable camelcase */
 import { Router } from 'express';
-import { parseISO } from 'date-fns';
-import { container } from 'tsyringe';
-
-import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
 
 import ensureAutheticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
+import ApppointmentsController from '../controllers/AppointmentsController';
 
 // Rotas precisam estar preocupadas apenas em fazer isso:
 //    - Receber requisição;
@@ -13,6 +10,7 @@ import ensureAutheticated from '@modules/users/infra/http/middlewares/ensureAuth
 //    - Devolver uma resposta.
 
 const appointmentRouter = Router();
+const appointmentsController = new ApppointmentsController();
 
 appointmentRouter.use(ensureAutheticated);
 
@@ -22,19 +20,6 @@ appointmentRouter.use(ensureAutheticated);
 //   return response.json(appointments);
 // });
 
-appointmentRouter.post('/', async (request, response) => {
-  const { provider_id, date } = request.body;
-
-  const parsedDate = parseISO(date);
-
-  const createAppointment = container.resolve(CreateAppointmentService);
-
-  const appointment = await createAppointment.execute({
-    provider_id,
-    date: parsedDate,
-  });
-
-  return response.json(appointment);
-});
+appointmentRouter.post('/', appointmentsController.create);
 
 export default appointmentRouter;
