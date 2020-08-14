@@ -9,7 +9,7 @@ import User from '../../infra/typeorm/entities/User';
 // DTO = Data Transfer Object => Basicamente é a transferência de dados em formato
 // de objetos
 
-class UserRepository implements IUsersRepository {
+class FakeUserRepository implements IUsersRepository {
   private users: User[] = [];
 
   public async findById(id: string): Promise<User | undefined> {
@@ -43,4 +43,4 @@ class UserRepository implements IUsersRepository {
   }
 }
 
-export default UserRepository;
+export default FakeUserRepository;
