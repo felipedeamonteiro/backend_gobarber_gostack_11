@@ -1,8 +1,6 @@
 /* eslint-disable camelcase */
 import { injectable, inject } from 'tsyringe';
 
-// import AppError from '@shared/errors/AppError';
-
 import User from '@modules/users/infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
@@ -17,7 +15,7 @@ interface IRequest {
 }
 
 @injectable()
-class UpdateProfile {
+class UpdateProfileService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUserRepository,
@@ -73,4 +71,4 @@ class UpdateProfile {
   }
 }
 
-export default UpdateProfile;
+export default UpdateProfileService;
