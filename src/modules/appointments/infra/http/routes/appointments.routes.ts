@@ -2,7 +2,7 @@
 import { Router } from 'express';
 
 import ensureAutheticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
-import ApppointmentsController from '../controllers/AppointmentsController';
+import AppointmentsController from '../controllers/AppointmentsController';
 
 // Rotas precisam estar preocupadas apenas em fazer isso:
 //    - Receber requisição;
@@ -10,7 +10,7 @@ import ApppointmentsController from '../controllers/AppointmentsController';
 //    - Devolver uma resposta.
 
 const appointmentRouter = Router();
-const appointmentsController = new ApppointmentsController();
+const appointmentsController = new AppointmentsController();
 
 appointmentRouter.use(ensureAutheticated);
 
