@@ -9,6 +9,7 @@ import IAppointmentRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequest {
   provider_id: string;
+  user_id: string;
   date: Date;
 }
 
@@ -23,7 +24,11 @@ class CreateAppointmentService {
   ) {}
 
   // só tem um método pq cada service só precisa se preocupar com uma responsabilidade
-  public async execute({ date, provider_id }: IRequest): Promise<Appointment> {
+  public async execute({
+    date,
+    provider_id,
+    user_id,
+  }: IRequest): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
 
     const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
@@ -37,6 +42,7 @@ class CreateAppointmentService {
     // Agora com a mudança feita o método "create" cria e já salva os dados.
     const appointment = await this.appointmentsRepository.create({
       provider_id,
+      user_id,
       date: appointmentDate,
     });
 
