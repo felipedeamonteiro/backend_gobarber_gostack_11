@@ -11,7 +11,7 @@ import Appointment from '../entities/Appointment';
 // DTO = Data Transfer Object => Basicamente é a transferência de dados em formato
 // de objetos
 
-class AppointmentRepository implements IAppointmentsRepository {
+class AppointmentsRepository implements IAppointmentsRepository {
   private ormRepository: Repository<Appointment>;
 
   constructor() {
@@ -85,4 +85,4 @@ class AppointmentRepository implements IAppointmentsRepository {
   }
 }
 
-export default AppointmentRepository;
+export default AppointmentsRepository;
