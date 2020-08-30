@@ -1,5 +1,6 @@
 import nodemailer, { Transporter } from 'nodemailer';
 import aws from 'aws-sdk';
+import mailConfig from '@config/mail';
 import { injectable, inject } from 'tsyringe';
 
 import IMailTemplateProvider from '@shared/container/providers/MailTemplateProvider/models/IMailTemplateProvider';
@@ -17,9 +18,12 @@ export default class SESMailProvider implements IMailProvider {
     this.client = nodemailer.createTransport({
       SES: new aws.SES({
         apiVersion: '2010-12-01',
+        region: 'us-east-2',
       }),
     });
   }
+
+  // TODO: It's needed to configure amazonses to send emails in production
 
   public async sendMail({
     to,
@@ -27,10 +31,12 @@ export default class SESMailProvider implements IMailProvider {
     subject,
     templateData,
   }: ISendMailDTO): Promise<void> {
+    const { name, email } = mailConfig.defaults.from;
+
     await this.client.sendMail({
       from: {
-        name: from?.name || 'Equipe Gobarber',
-        address: from?.email || 'equipe@gobarber.com.br',
+        name: from?.name || name,
+        address: from?.email || email,
       },
       to: {
         name: to.name,

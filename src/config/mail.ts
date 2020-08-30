@@ -1,5 +1,12 @@
 interface IMailConfig {
   driver: 'ethereal' | 'ses';
+
+  defaults: {
+    from: {
+      email: string;
+      name: string;
+    };
+  };
 }
 
 export default {
@@ -7,7 +14,8 @@ export default {
 
   defaults: {
     from: {
-      email: '',
+      email: 'felipe@felipedeamonteiro.com',
+      name: 'Felipe Monteiro',
     },
   },
 } as IMailConfig;
