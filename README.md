@@ -73,3 +73,28 @@ Backend do Bootcamp GoStack
 - O usuário não pode agendar em um horário já ocupado;
 - O usuário não pode agendar em um horário que já passou;
 - O usuário não pode agendar serviços consigo mesmo;
+
+
+# Para rodar o projeto
+
+Primeiro é necessário intalar docker e as imagens abaixo:
+
+```
+docker run --name mongodb -p 27017:27017 -d -t mongo
+```
+```
+docker run --name redis -p 6379:6379 -d -t redis:alpine
+```
+```
+docker run --name gostack_postgres -e POSTGRES_PASSWROD=docker -p 5432:5432 -d postgres
+```
+
+Depois disso para rodar o servidor localmente rode:
+
+```
+yarn dev:server
+```
+
+## Tarefas faltantes!
+- Configurar Amazon SES para envio de emails em produção;
+- Configurar Amazon SE para armazenar imagens;
