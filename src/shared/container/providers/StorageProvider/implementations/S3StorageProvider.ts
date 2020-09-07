@@ -25,8 +25,6 @@ class S3StorageProvider implements IStorageProvider {
 
     const fileContent = await fs.promises.readFile(originalPath);
 
-    // TODO: Fix, somehow, the storage of files in aws
-
     await this.client
       .putObject({
         Bucket: uploadConfig.config.aws.bucket,

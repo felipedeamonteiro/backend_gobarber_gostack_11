@@ -23,8 +23,6 @@ export default class SESMailProvider implements IMailProvider {
     });
   }
 
-  // TODO: It's needed to configure amazon ses properly to send emails in production
-
   public async sendMail({
     to,
     from,
