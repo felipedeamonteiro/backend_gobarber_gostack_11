@@ -13,10 +13,6 @@ interface IRequest {
   password: string;
 }
 
-// Aqui eu não preciso criar um repositório de users pq eu não terei nenhum método
-// diferente dos padrões (CRUD), então eu pego esse método do getRepository do tyorm
-// e passo o User como parâmetro.
-
 @injectable()
 class CreateUserService {
   constructor(
