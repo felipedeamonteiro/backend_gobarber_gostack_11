@@ -95,6 +95,3 @@ Depois disso para rodar o servidor localmente rode:
 yarn dev:server
 ```
 
-## Tarefas faltantes!
-- Configurar Amazon SES para envio de emails em produção;
-- Configurar Amazon SE para armazenar imagens;
